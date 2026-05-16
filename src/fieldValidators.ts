@@ -46,7 +46,12 @@ export class FieldValidator{
                     return Number(value)
 
                 case "bool":
-                    return Boolean(value)
+                    value = value.toLowerCase()
+
+                    if(!["true", "false"].includes(value))
+                        throw new Error("Invalid boolean")
+
+                    return value == "true"
             }
         } catch (error) {}
     }

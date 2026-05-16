@@ -1,11 +1,55 @@
 import { describe, expect, it } from "vitest";
 import { FieldValidator } from "../src/fieldValidators";
 
-/*describe("Type checks", () => {
+describe("Type checks", () => {
+	it("String", async () => {
+		const validator = new FieldValidator({"type": "string"})
+		const [isValid, error] = validator.validate("abc")
 
+		expect(isValid)
+        expect(error).toBe(undefined)
+	});
+
+	it("Valid number", async () => {
+		const validator = new FieldValidator({"type": "number"})
+		const [isValid, error] = validator.validate("1")
+
+		expect(isValid)
+        expect(error).toBe(undefined)
+	});
+
+	it("Invalid number", async () => {
+		const validator = new FieldValidator({"type": "number"})
+		const [isValid, error] = validator.validate("abc3")
+
+		expect(!isValid)
+        expect(error).toBe(undefined)
+	});
+
+	it("Valid boolean", async () => {
+		const validator = new FieldValidator({"type": "bool"})
+
+		for(const string of ["true", "false"]){
+			const [isValid, error] = validator.validate(string)
+
+			expect(isValid)
+			expect(error).toBe(undefined)
+		}
+	});
+
+	it("Invalid boolean", async () => {
+		const validator = new FieldValidator({"type": "bool"})
+
+		for(const string of ["y", "n", "falks"]){
+			const [isValid, error] = validator.validate(string)
+
+			expect(!isValid)
+			expect(error).toBe("Requires bool data type")
+		}
+	});
 })
 
-describe("Requirement checks", () => {
+/*describe("Requirement checks", () => {
 
 })
 
@@ -21,30 +65,30 @@ describe("String length validation", () => {
     })
 
 	it("throws an error for being too long", async () => {
-		const [result, error] = validator.validate("12345678901")
+		const [isValid, error] = validator.validate("12345678901")
 
-		expect(!result)
+		expect(!isValid)
         expect(error).toBe("This value is longer then 10 characters")
 	});
 
 	it("throws an error for being too short", async () => {
-		const [result, error] = validator.validate("1")
+		const [isValid, error] = validator.validate("1")
 
-		expect(!result)
+		expect(!isValid)
         expect(error).toBe("This value is shorter then 2 characters")
 	});
 
 	it("valid in maximum boundary", async () => {
-		const [result, error] = validator.validate("1234567890")
+		const [isValid, error] = validator.validate("1234567890")
 
-		expect(result)
+		expect(isValid)
         expect(error).toBe(undefined)
 	});
 
 	it("valid on minimum boundary", async () => {
-		const [result, error] = validator.validate("123")
+		const [isValid, error] = validator.validate("123")
 
-		expect(result)
+		expect(isValid)
         expect(error).toBe(undefined)
 	});
 });
@@ -58,24 +102,24 @@ describe("Number range check", () => {
     })
 
 	it("throws an error for being too large", async () => {
-		const [result, error] = validator.validate("11")
+		const [isValid, error] = validator.validate("11")
 
-		expect(!result)
+		expect(!isValid)
         expect(error).toBe("This value is bigger then 10")
 	});
 
 	it("throws an error for being too small", async () => {
-		const [result, error] = validator.validate("0")
+		const [isValid, error] = validator.validate("0")
 
-		expect(!result)
+		expect(!isValid)
         expect(error).toBe("This value is smaller then 1")
 	});
 
 	it("valid in valid boundary", async () => {
 		for(let i=1; i<=10; i++){
-			const [result, error] = validator.validate(String(i))
+			const [isValid, error] = validator.validate(String(i))
 
-			expect(result)
+			expect(isValid)
 			expect(error).toBe(undefined)
 		}
 	});
