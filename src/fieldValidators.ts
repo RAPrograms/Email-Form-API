@@ -12,7 +12,7 @@ interface Constraints {
     minvalue?: number
 }
 
-class FieldValidator{
+export class FieldValidator{
     #typeValidator: (value: any) => [boolean, string?] = (value: any) => [true, undefined]
     #constraints: Constraints
 
@@ -62,12 +62,12 @@ class FieldValidator{
 
     #validateString(value: string): [boolean, string?]{
         const maxlength = this.#constraints["maxlength"]
-        if(maxlength && value.length < maxlength)
+        if(maxlength && value.length > maxlength)
             return [false, `This value is longer then ${maxlength} characters`]
 
         const minlength = this.#constraints["minlength"]
-        if(minlength && value.length > minlength)
-            return [false, `This value is smaller then ${maxlength} characters`]
+        if(minlength && value.length < minlength)
+            return [false, `This value is shorter then ${minlength} characters`]
 
         return [true, undefined]
     }
