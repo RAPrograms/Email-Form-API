@@ -1,0 +1,40 @@
+# This toml file defines what form values are accepted
+#
+# Fields are defined by square brakets
+# ETC: [field-name]
+#
+# Each field can have any of these following properties
+#
+# ------- General Validation ------- 
+# type: "string" or "number" or "bool" (default: "string")
+# required: "true" or "false" (default: true)
+# pattern: any valid regex without the start and ending slashes or predefined ones
+#   - "email"
+# 
+# ------- String Only Validation ------- 
+# maxlength: any intager
+# minlength: any intager
+# 
+# ------- Number Only Validation ------- 
+# maxvalue: any intager
+# minvalue: any intager
+
+
+[name]
+pattern='[a-zA-Z]+\s[a-zA-Z]+' # Checks for full name
+minlength=3
+
+[email]
+pattern="email"
+
+[age]
+type="number"
+minvalue=18
+maxvalue=200
+
+[phone-number]
+required=false
+
+[subject]
+minlength=5
+maxlength=255
