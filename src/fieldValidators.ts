@@ -1,7 +1,7 @@
 interface Constraints {
     type?: "string" | "number" | "bool" 
     required?: boolean
-    patten?: string | "email"
+    pattern?: string | "email"
 
     // String validations
     maxlength?: number
@@ -61,7 +61,7 @@ export class FieldValidator{
     }
 
     #validatePattern(value: string): boolean {
-        const pattern = this.#constraints["patten"]
+        const pattern = this.#constraints["pattern"]
         if(pattern == undefined)
             return true
 
@@ -101,7 +101,7 @@ export class FieldValidator{
             return [false, "Missing field"]
 
         if(!this.#validatePattern(value))
-            return [false, `Value does not match the pattern (${this.#constraints["patten"]})`]
+            return [false, `Value does not match the pattern (${this.#constraints["pattern"]})`]
 
         const data = this.#castType(value)
         if(data == undefined)

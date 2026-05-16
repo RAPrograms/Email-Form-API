@@ -82,12 +82,27 @@ describe("Requirement checks", () => {
 	});
 })
 
-/*describe("Pattern checks", () => {
+describe("Pattern checks", () => {
+	const validator = new FieldValidator({"pattern": "[1-9]"})
 
-})*/
+	it("Valid string", async () => {
+		const [isValid, error] = validator.validate("1")
+
+		expect(isValid)
+		expect(error).toBe(undefined)
+	});
+
+	it("Invalid string", async () => {
+		const [isValid, error] = validator.validate("a")
+
+		expect(!isValid)
+		expect(error).toBe("Value does not match the pattern ([1-9])")
+	});
+
+})
 
 describe("Pre-defined pattern checks", () => {
-	const emailValidator = new FieldValidator({"patten": "email"})
+	const emailValidator = new FieldValidator({"pattern": "email"})
 
 	it("Valid email addresses", async () => {
 		for(const email of [
