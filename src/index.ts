@@ -1,5 +1,6 @@
 import { parse as parseToml } from "smol-toml";
 import { env } from "cloudflare:workers";
+import { Liquid } from 'liquidjs';
 import { Resend } from 'resend';
 
 import config from "../validation.toml";
@@ -7,15 +8,18 @@ import load from "./fieldValidators";
 
 const resend = new Resend(env.RESENT_API_SECRET);
 const validators = load(parseToml(config))
+const engine = new Liquid();
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		if(request.method.toLowerCase() != "post")
 			return new Response("This is a post endpoint", {status: 400})
 
+		// Gets all data from request
 		const formdata = await request.formData()
-		const errors: Record<string, string> = {}
 
+		// Outputs after validation
+		const errors: Record<string, string> = {}
 		const requestData: Record<string, string> = {}
 
 		// Go though all feilds to check for errors
@@ -31,13 +35,23 @@ export default {
 			requestData[name] = value
 		}
 
+		// Fetch email template preemptively
+		const templateRequest = await env.TEMPLATES.fetch("http://templates/email.html")
+
 		// Returns all errors if any were detected
 		if(Object.keys(errors).length > 0)
 			return Response.json({
 				message: "Invalid form data",
 				details: errors
 			}, {status: 422})
+		
+		console.log(requestData)
+		
+		// Get template content
+		const templateRaw = await templateRequest.text()
 
+		// Render email template
+		const htmlResult = await engine.parseAndRender(templateRaw, {data: requestData});
 
 		// Send email
 		const { error } = await resend.emails.send({
@@ -46,7 +60,7 @@ export default {
 
 			to: [env.RECEIVING_EMAIL],
 			subject: `Inquiry: ${requestData["subject"]}`,
-			html: '<strong>It works!</strong>',
+			html: htmlResult,
 		});
 
 		if (error) {

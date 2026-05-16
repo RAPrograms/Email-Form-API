@@ -17,6 +17,7 @@
 		"wrangler": "^4.92.0"
 	},
 	"dependencies": {
+		"liquidjs": "^10.27.0",
 		"resend": "^6.12.3",
 		"smol-toml": "^1.6.1"
 	}

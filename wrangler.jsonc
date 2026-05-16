@@ -20,10 +20,9 @@
 			"globs": ["../validation.toml"],
 			"fallthrough": true
 		}
-	]
-	/**
-	 * Static Assets
-	 * https://developers.cloudflare.com/workers/static-assets/binding/
-	 */
-	// "assets": {  "directory": "./public/",  "binding": "ASSETS" }
+	],
+	"assets": {
+		"directory": "./templates",
+		"binding": "TEMPLATES"
+	}
 }
