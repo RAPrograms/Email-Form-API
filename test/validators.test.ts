@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { FieldValidator } from "../src/fieldValidators";
 
+/*describe("Type checks", () => {
+
+})
+
+describe("Requirement checks", () => {
+
+})
+
+describe("Pattern checks", () => {
+
+})*/
+
 describe("String length validation", () => {
     const validator = new FieldValidator({
         "type": "string",
@@ -22,7 +34,7 @@ describe("String length validation", () => {
         expect(error).toBe("This value is shorter then 2 characters")
 	});
 
-	it("valid on maximum boundary", async () => {
+	it("valid in maximum boundary", async () => {
 		const [result, error] = validator.validate("1234567890")
 
 		expect(result)
@@ -36,3 +48,35 @@ describe("String length validation", () => {
         expect(error).toBe(undefined)
 	});
 });
+
+
+describe("Number range check", () => {
+	const validator = new FieldValidator({
+        "type": "number",
+        "maxvalue": 10,
+        "minvalue": 1
+    })
+
+	it("throws an error for being too large", async () => {
+		const [result, error] = validator.validate("11")
+
+		expect(!result)
+        expect(error).toBe("This value is bigger then 10")
+	});
+
+	it("throws an error for being too small", async () => {
+		const [result, error] = validator.validate("0")
+
+		expect(!result)
+        expect(error).toBe("This value is smaller then 1")
+	});
+
+	it("valid in valid boundary", async () => {
+		for(let i=1; i<=10; i++){
+			const [result, error] = validator.validate(String(i))
+
+			expect(result)
+			expect(error).toBe(undefined)
+		}
+	});
+})

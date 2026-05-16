@@ -74,12 +74,12 @@ export class FieldValidator{
 
     #validateNumber(value: number): [boolean, string?]{
         const maxvalue = this.#constraints["maxvalue"]
-        if(maxvalue && value < maxvalue)
+        if(maxvalue && value > maxvalue)
             return [false, `This value is bigger then ${maxvalue}`]
 
         const minvalue = this.#constraints["minvalue"]
-        if(minvalue && value > minvalue)
-            return [false, `This value is smaller then ${maxvalue}`]
+        if(minvalue && value < minvalue)
+            return [false, `This value is smaller then ${minvalue}`]
 
         return [true, undefined]
     }
