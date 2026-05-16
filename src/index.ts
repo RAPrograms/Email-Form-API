@@ -3,8 +3,8 @@ import { env } from "cloudflare:workers";
 import { Liquid } from 'liquidjs';
 import { Resend } from 'resend';
 
-import config from "../validation.toml";
 import load from "./fieldValidators";
+import config from "../schema.toml";
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
