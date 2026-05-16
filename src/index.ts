@@ -6,14 +6,13 @@ import { Resend } from 'resend';
 import config from "../validation.toml";
 import load from "./fieldValidators";
 
-const resend = new Resend(env.RESENT_API_SECRET);
-const validators = load(parseToml(config))
-const engine = new Liquid();
-
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		if(request.method.toLowerCase() != "post")
 			return new Response("This is a post endpoint", {status: 400})
+
+		// Define form validators
+		const validators = load(parseToml(config))
 
 		// Gets all data from request
 		const formdata = await request.formData()
@@ -35,6 +34,9 @@ export default {
 			requestData[name] = value
 		}
 
+		// Setup resend 
+		const resend = new Resend(env.RESENT_API_SECRET);
+
 		// Fetch email template preemptively
 		const templateRequest = await env.TEMPLATES.fetch("http://templates/email.html")
 
@@ -45,10 +47,11 @@ export default {
 				details: errors
 			}, {status: 422})
 		
-		console.log(requestData)
-		
 		// Get template content
 		const templateRaw = await templateRequest.text()
+
+		// Setup template engine
+		const engine = new Liquid();
 
 		// Render email template
 		const htmlResult = await engine.parseAndRender(templateRaw, {data: requestData});
