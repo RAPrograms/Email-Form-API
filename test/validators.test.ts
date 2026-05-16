@@ -86,6 +86,59 @@ describe("Requirement checks", () => {
 
 })*/
 
+describe("Pre-defined pattern checks", () => {
+	const emailValidator = new FieldValidator({"patten": "email"})
+
+	it("Valid email addresses", async () => {
+		for(const email of [
+			"john.doe@example.com",
+			"support123@domain.co.uk",
+			"alex_smith@company.org",
+			"sales-department@enterprise.net",
+			"info@subdomain.example.com",
+			"a@domain.com",
+			"customer.service.help@brand.global",
+			"1234567890@numeric-domain.com",
+			"xyz@a.b.c.d.e.f.g.h.i.j.edu"
+		]){
+			const [isValid, error] = emailValidator.validate(email)
+
+			expect(isValid)
+			expect(error, email).toBe(undefined)
+		}
+	});
+
+	it("Extreme valid email addresses", async () => {
+		for(const email of [
+			"user+mailbox123@example.com",
+			"much.more.unusual@example.com",
+			"user.name+tag+sorting@example.com",
+			"admin@123.123.123.123",
+			"admin@[123.123.123.123]"
+		]){
+			const [isValid, error] = emailValidator.validate(email)
+
+			expect(isValid)
+			expect(error, email).toBe(undefined)
+		}
+	});
+
+	it("Invalid email addresses", async () => {
+		for(const email of [
+			"johndoe.com",
+			"john.doe@",
+			"@example.com",
+			"john.doe@com",
+			"john"
+		]){
+			const [isValid, error] = emailValidator.validate(email)
+
+			expect(!isValid)
+			expect(error, email).toBe("Value does not match the pattern (email)")
+		}
+	});
+})
+
 describe("String length validation", () => {
     const validator = new FieldValidator({
         "type": "string",
