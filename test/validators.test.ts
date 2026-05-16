@@ -49,11 +49,40 @@ describe("Type checks", () => {
 	});
 })
 
-/*describe("Requirement checks", () => {
+describe("Requirement checks", () => {
+	const requiredValidator = new FieldValidator({"required": true})
+	const nonRequiredValidator = new FieldValidator({"required": false})
+	
+	it("Empty value for required field", async () => {
+		const [isValid, error] = requiredValidator.validate("")
 
+		expect(!isValid)
+        expect(error).toBe("Missing field")
+	});
+
+	it("Passed value for required field", async () => {
+		const [isValid, error] = requiredValidator.validate("Hi There")
+
+		expect(isValid)
+        expect(error).toBe(undefined)
+	});
+
+	it("Empty value for non-required field", async () => {
+		const [isValid, error] = nonRequiredValidator.validate("")
+
+		expect(isValid)
+        expect(error).toBe(undefined)
+	});
+
+	it("Passed value for non-required field", async () => {
+		const [isValid, error] = nonRequiredValidator.validate("Hi There")
+
+		expect(isValid)
+        expect(error).toBe(undefined)
+	});
 })
 
-describe("Pattern checks", () => {
+/*describe("Pattern checks", () => {
 
 })*/
 
