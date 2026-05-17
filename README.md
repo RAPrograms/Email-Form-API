@@ -121,8 +121,8 @@ Validation options
 |-----------|--------------------------------------------------------------------------------|-------------------------------------|----------|
 | type      | Rejects any value which is not a valid instance of this type                   | "string", "number", "bool"          | "string" |
 | required  | States wether the API should allow this value to be empty or null              | true, false                         | true     |
-| pattern   | Checks if the value is valid against this regex. There are also premade regexs | Any regex or premade ones ("email") | a|
-| maxlength | Rejects any **string type** which length exceeds this value                    | Any integer                         | a|
-| minlength | Rejects any **string type** which length fulls under this value                | Any integer                         | aa|
-| maxvalue  | Rejects any **number type** which length exceeds this value                    | Any integer                         | a|
-| minvalue  | Rejects any **number type** which length fulls under this value                | Any integer                         | a|
+| pattern   | Checks if the value is valid against this regex. There are also premade regexs | Any regex or premade ones ("email") | N/A		 |
+| maxlength | Rejects any **string type** which length exceeds this value                    | Any integer                         | N/A		 |
+| minlength | Rejects any **string type** which length fulls under this value                | Any integer                         | N/A		 |
+| maxvalue  | Rejects any **number type** which length exceeds this value                    | Any integer                         | N/A		 |
+| minvalue  | Rejects any **number type** which length fulls under this value                | Any integer                         | N/A		 |
