@@ -13,7 +13,7 @@ env:
 
 
 jobs:
-  Deploy:
+  Testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
