@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Email Form</title>
+</head>
+<body>
+    
+    <form method="post" action="<TODO: Insert Worker URL Here>">
+        <fieldset>
+            <legend>Details</legend>
+            <label>
+                <div>Name</div>
+                <input type="text" name="name" pattern="[a-zA-Z]+\s[a-zA-Z]+" minlength="3" required>
+            </label>
+            <label>
+                <div>Age</div>
+                <input type="number" name="age" min="18" max="200" required>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact Details</legend>
+
+            <label>
+                <div>Email Address</div>
+                <input type="email" name="email" required>
+            </label>
+
+            <label>
+                <div>Phone Number</div>
+                <input type="text" name="phone-number">
+            </label>
+        </fieldset>
+
+        <label>
+            <div>Subject</div>
+            <textarea name="subject" minlength="5" maxlength="255" required></textarea>
+        </label>
+
+        <button type="submit">Send</button>
+    </form>
+
+</body>
+</html>
