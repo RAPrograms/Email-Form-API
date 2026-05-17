@@ -126,3 +126,18 @@ Validation options
 | minlength | Rejects any **string type** which length fulls under this value                | Any integer                         | N/A		 |
 | maxvalue  | Rejects any **number type** which length exceeds this value                    | Any integer                         | N/A		 |
 | minvalue  | Rejects any **number type** which length fulls under this value                | Any integer                         | N/A		 |
+
+# Constant Deployment (CD)
+This repo includes `.github/workflows/deploy.yml` which is a Github Action designed to deploy the worker to Cloudflare.
+
+To set it up
+1) Go to [Cloudflare dashboard](https://dash.cloudflare.com/)
+2) Go to Manage Account > Account API tokens
+3) Click the create token button
+4) Set the following permissions
+    - Account Settings: Read
+    - Workers Scripts: Write
+5) Create the token
+6) Set the Github actions secrets
+    - CLOUDFLARE_ACCOUNT_ID
+    - CLOUDFLARE_API_TOKEN
