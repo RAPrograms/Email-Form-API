@@ -70,31 +70,18 @@ wrangler deploy
 
 ## Setup Resend
 
-1) Create API key
+1) Create API key at [https://resend.com/api-keys?new=true](https://resend.com/api-keys?new=true)
 
-Create and copy API key
+2) Setup domain at [https://resend.com/domains](https://resend.com/domains)
 
-```http
-Goto https://resend.com/api-keys?new=true
-```
-
-2) Setup domain
-
-```http
-Goto https://resend.com/domains
-```
-
+   
 ## Setup Turnstile
-1) Go to Cloudflare dashboard
-
-```http
-Goto https://dash.cloudflare.com/
-```
+1) Go to [Cloudflare dashboard](https://dash.cloudflare.com/)
 
 2) Got to widgets
 
 ```
-    Open Protect & Connect > Application security > Turnstile
+Open Protect & Connect > Application security > Turnstile
 ```
 
 3) Create Widget
@@ -102,11 +89,7 @@ Go through the creation form and save a copy of the **Site key** and **Secret ke
 
 
 ## Setup enviroment
-1) Go to Cloudflare dashboard
-
-```http
-Goto https://dash.cloudflare.com/
-```
+1) Go to [Cloudflare dashboard](https://dash.cloudflare.com/)
 
 2) View all workers
 
