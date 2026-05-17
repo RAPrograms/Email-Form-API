@@ -2,6 +2,8 @@
 
 A Cloudflare worker designed to allow contact-us forms to function. Built upon Cloudflare workers.
 
+[![Testing](https://github.com/RAPrograms/Email-Form-API/actions/workflows/testing.yml/badge.svg?branch=main)](https://github.com/RAPrograms/Email-Form-API/actions/workflows/testing.yml)
+
 ## Why use it?
 I created this worker for my personal [portfolio](https://raprograms.co.uk) website to send me an email with any form submissions. 
 
