@@ -1,6 +1,6 @@
 # Email Form API
 
-A Cloudflare worker designed to allow contact-us forms to function. Built upon Cloudflare workers.
+A Cloudflare workers API designed to send emails to a certain email, based on form submissions
 
 [![Testing](https://github.com/RAPrograms/Email-Form-API/actions/workflows/testing.yml/badge.svg?branch=main)](https://github.com/RAPrograms/Email-Form-API/actions/workflows/testing.yml)
 
