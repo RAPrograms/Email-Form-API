@@ -13,6 +13,7 @@ This worker was created due to both Cloudflare and Resend offering free monthly 
 | Tech                                                                              | Details                                                                         |
 |-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 | [Cloudflare workers](https://developers.cloudflare.com/workers/platform/pricing/) | Free 100,000 requests per day (10 milliseconds of CPU time maximum per request) |
+| [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/plans/)        | A bot prevention system ideal for "Personal websites and blogs"                 |
 | [Resend](https://resend.com/pricing)                                              | 3,000 emails per month (100 emails a day)                                       |
 
 *Details accessed on 16th May 2026*
@@ -81,6 +82,23 @@ Goto https://resend.com/api-keys?new=true
 Goto https://resend.com/domains
 ```
 
+## Setup Turnstile
+1) Go to Cloudflare dashboard
+
+```http
+Goto https://dash.cloudflare.com/
+```
+
+2) Got to widgets
+
+```
+    Open Protect & Connect > Application security > Turnstile
+```
+
+3) Create Widget
+Go through the creation form and save a copy of the **Site key** and **Secret key**
+
+
 ## Setup enviroment
 1) Go to Cloudflare dashboard
 
@@ -102,6 +120,7 @@ Create the following **secret** values
 - RESENT_API_SECRET: The Resend API key
 - RECEIVING_EMAIL: The email address you want all form submissions to be sent to
 - SERVICE_EMAIL: The email Resend uses. Example is inquiries@emails.&lt;domain&gt;
+- CF_TURNSTILE_SECRET: The Cloudflare Turnstile secret key
 
 # Schema Format
 This system uses the `/schema.toml` file to define what form values are captured and how they are validated.

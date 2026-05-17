@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example Email Form</title>
+
+    <!-- Cloudflare Turnstile -->
+    <script async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js">
+</script>
 </head>
 <body>
     
@@ -38,6 +42,8 @@
             <div>Subject</div>
             <textarea name="subject" minlength="5" maxlength="255" required></textarea>
         </label>
+
+        <div class="cf-turnstile" data-sitekey="<TODO: Insert Cloudflare Turnstile site key>"></div>
 
         <button type="submit">Send</button>
     </form>
