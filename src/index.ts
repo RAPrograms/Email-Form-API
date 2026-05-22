@@ -130,6 +130,17 @@ async function processSubmission(request, env, resHeaders: Record<string, any>):
 	});
 
 	if (error) {
+		// Handles invalid email address errors
+		if(error["name"] == "validation_error" && error["message"] == 'Invalid `reply_to` field. The email address needs to follow the `email@example.com` or `Name <email@example.com>` format.')
+			return Response.json({
+				success: false,
+				message: "Invalid form data",
+				details: { "email": "Invalid email address" }
+			}, {
+				status: 422,
+				headers: resHeaders
+			})
+
 		console.error("Email sending error:", error)
 		return Response.json({
 			success: false,
@@ -142,7 +153,7 @@ async function processSubmission(request, env, resHeaders: Record<string, any>):
 	}
 	
 	// @ts-ignore
-	return new Response.json({
+	return Response.json({
 		success: true
 	}, {
 		status: 200,
