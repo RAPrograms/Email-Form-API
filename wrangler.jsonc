@@ -15,6 +15,11 @@
 			"type": "Text",
 			"globs": ["../schema.toml"],
 			"fallthrough": true
+		},
+		{
+			"type": "Text",
+			"globs": ["../allowed_origins.json"],
+			"fallthrough": true
 		}
 	],
 	"assets": {
